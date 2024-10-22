@@ -1,38 +1,64 @@
 class Quiz {
-    constructor(questionsValue, timeLimitValue, timeRemainingValue) {
-        this.questions = questionsValue
-        this.timeLimit = timeLimitValue
-        this.timeRemaining = timeRemainingValue
+    constructor(questions, timeLimit, timeRemaining) {
+        this.questions = questions
+        this.timeLimit = timeLimit
+        this.timeRemaining = timeRemaining
         this.correctAnswers = 0
         this.currentQuestionIndex = 0
     }
-
     getQuestion() {
         return this.questions[this.currentQuestionIndex]
     }
-
     moveToNextQuestion() {
         this.currentQuestionIndex++
     }
-
     shuffleQuestions() {
-        for (let i = this.questions.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [this.questions[i], this.questions[j]] = [this.questions[j], this.questions[i]];
+        this.questions.sort(() => .5 - Math.random());
+    }
+    checkAnswer(answerToCheck) {
+        const correctAnswer = this.getQuestion().answer
+        if (answerToCheck === correctAnswer) {
+            this.correctAnswers++
         }
     }
-
-    checkAnswer(answer) {
-        if (answer === this.getQuestion().answer)
-            return this.correctAnswers++
-    }
-
     hasEnded() {
-        if (this.currentQuestionIndex < this.questions.length) {
-            return false
-        }
-        if (this.currentQuestionIndex = this.questions) {
-            return true
-        }
+        return this.currentQuestionIndex >= this.questions.length
     }
+    filterQuestionsByDifficulty(difficulty) {
+        if (difficulty >= 1 || this.difficulty <= 3) {
+            this.questions = this.questions.filter(eachQuestion => {
+                return eachQuestion.difficulty
+            }
+
+            )
+        }
+        return this.questions
+
+    }
+
+
+
+
 }
+averageDifficulty() {
+    const difficultyMid = this.questions.filter(eachQuestion => {
+        return eachQuestion.difficulty / this.questions.length
+    }
+
+    )
+    return difficultyMid
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
