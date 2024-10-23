@@ -25,33 +25,41 @@ class Quiz {
         return this.currentQuestionIndex >= this.questions.length
     }
     filterQuestionsByDifficulty(difficulty) {
-        if (difficulty >= 1 || this.difficulty <= 3) {
-            this.questions = this.questions.filter(eachQuestion => {
-                return eachQuestion.difficulty
-            }
 
-            )
+        if (difficulty > 0 && difficulty < 4 && !isNaN(difficulty)) {
+
+            const filteredQuestions = this.questions.filter(eachQuestion => {
+                return eachQuestion.difficulty === difficulty
+            })
+
+            this.questions = filteredQuestions
         }
-        return this.questions
+    }
 
+    averageDifficulty() {
+
+        const sumDifficulty = this.questions.reduce((acc, eachQuestion) => {
+
+            // if (eachPresident.leftOffice === null) {
+            //     return acc
+            // }
+
+            return acc + eachQuestion.difficulty
+        }, 0)
+
+        const average = sumDifficulty / this.questions.length
+
+        return average
     }
 
 
 
 
 }
-averageDifficulty() {
-    const difficultyMid = this.questions.filter(eachQuestion => {
-        return eachQuestion.difficulty / this.questions.length
-    }
-
-    )
-    return difficultyMid
-}
 
 
 
-}
+
 
 
 
